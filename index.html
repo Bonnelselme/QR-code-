@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dating App Profile</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        background-color: #4b5563;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+      }
+
+      .app-title {
+        width: 100%;
+        max-width: 24rem;
+        margin: 0 auto 1rem;
+        text-align: center;
+      }
+
+      .app-title h1 {
+        font-size: 1.875rem;
+        color: white;
+        font-weight: 700;
+      }
+
+      .app-title h2 {
+        font-size: 1.875rem;
+        color: white;
+        font-style: italic;
+        display: inline-block;
+        position: relative;
+      }
+
+      .app-title h2::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0.125rem;
+        background-color: white;
+      }
+
+      .phone-frame {
+        width: 100%;
+        max-width: 24rem;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 40px;
+        overflow: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border: 8px solid black;
+        position: relative;
+      }
+
+      .status-bar {
+        background-color: #e5e7eb;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1.5rem;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        font-size: 0.75rem;
+      }
+
+      .status-bar-right {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .profile-content {
+        position: relative;
+        display: flex;
+        justify-content: center;
+      }
+
+      .profile-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+
+      .close-button,
+      .menu-button {
+        position: absolute;
+        top: 1rem;
+        width: 2rem;
+        height: 2rem;
+        background-color: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(4px);
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .close-button {
+        left: 1rem;
+      }
+
+      .menu-button {
+        right: 1rem;
+      }
+
+      .interest-tags {
+        position: absolute;
+      }
+
+      .interest-tags.right {
+        top: 6rem;
+        right: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .interest-tags.left {
+        top: 10rem;
+        left: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .badge {
+        background-color: white;
+        color: black;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        white-space: nowrap;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border-radius: 9999px;
+      }
+
+      .views-badge {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        background-color: rgb(239, 68, 68);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .views-badge svg {
+        margin-right: 0.25rem;
+      }
+
+      .like-button {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        background-color: #f3f4f6;
+      }
+
+      .like-button.active {
+        background-color: #ec4899;
+      }
+
+      .like-button svg {
+        transition: colors 0.3s;
+      }
+
+      .like-button.active svg {
+        color: white;
+        fill: currentColor;
+      }
+
+      .like-button:not(.active) svg {
+        color: #ec4899;
+        fill: none;
+      }
+
+      .star-button {
+        position: absolute;
+        bottom: 5rem;
+        right: 1rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 9999px;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      .profile-info {
+        padding: 1rem;
+        background-color: white;
+      }
+
+      .profile-name-age {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .crown-icon {
+        display: inline-flex;
+        margin-right: 0.5rem;
+      }
+
+      .crown-icon img {
+        height: 2rem;
+        width: auto;
+      }
+
+      .profile-name {
+        font-size: 3rem;
+        font-weight: 900;
+      }
+
+      .profile-age {
+        font-size: 1.875rem;
+        margin-left: 0.5rem;
+        color: #9ca3af;
+      }
+
+      .verified-badge {
+        margin-left: 0.5rem;
+        cursor: pointer;
+        transition: opacity 0.3s;
+      }
+
+      .verified-badge img {
+        height: 2rem;
+        width: auto;
+      }
+
+      .verified-badge.inactive {
+        opacity: 0.5;
+      }
+
+      .location {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        margin-bottom: 0.25rem;
+        font-size: 0.875rem;
+        color: #4b5563;
+      }
+
+      .active-status {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .active-indicator {
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: #10b981;
+        border-radius: 9999px;
+      }
+
+      .active-text {
+        font-size: 0.75rem;
+        color: #10b981;
+        font-weight: 500;
+      }
+
+      .conversation-starter {
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+        background-color: #f3f4f6;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+      }
+
+      .conversation-starter span {
+        color: #6b7280;
+      }
+
+      .profile-actions {
+        margin-top: 1.5rem;
+      }
+
+      .actions-buttons {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+      }
+
+      .pass-button {
+        background-color: #ef4444;
+        color: white;
+        font-weight: 700;
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        transition: background-color 0.3s;
+        border: none;
+        cursor: pointer;
+      }
+
+      .pass-button:hover {
+        background-color: #dc2626;
+      }
+
+      .like-action-button {
+        background: linear-gradient(to right, #60a5fa, #2563eb);
+        color: white;
+        font-weight: 700;
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        transition: background 0.3s;
+        border: none;
+        cursor: pointer;
+      }
+
+      .like-action-button:hover {
+        background: linear-gradient(to right, #3b82f6, #1d4ed8);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Titre de l'application -->
+    <div class="app-title">
+      <h1>ma</h1>
+      <h2>Copine</h2>
+    </div>
+
+    <div class="phone-frame">
+      <!-- Barre de statut -->
+      <div class="status-bar">
+        <span>9:41</span>
+        <div class="status-bar-right">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M18 10a8 8 0 0 0-16 0v5.5a2.5 2.5 0 0 0 2.5 2.5h11a2.5 2.5 0 0 0 2.5-2.5V10Z"
+            ></path>
+            <path d="M10 2v2"></path>
+            <path d="M14 2v2"></path>
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 5v14"></path>
+            <path d="M16 5v14"></path>
+            <path d="M12 5v14"></path>
+            <path d="M8 5v14"></path>
+            <path d="M4 5v14"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Contenu du profil -->
+      <div class="profile-content">
+        <!-- Image du profil -->
+        <img
+          src="/res/image.jpeg"
+          alt="Profil de Tessa"
+          class="profile-image"
+        />
+
+        <!-- Bouton de fermeture -->
+        <div class="close-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </div>
+
+        <!-- Bouton du menu -->
+        <div class="menu-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="1"></circle>
+            <circle cx="12" cy="6" r="1"></circle>
+            <circle cx="12" cy="18" r="1"></circle>
+          </svg>
+        </div>
+
+        <!-- Tags d'intérêts -->
+        <div class="interest-tags right">
+          <div class="badge">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M4 17l2 2"></path>
+              <path d="M7 17H4v-3"></path>
+              <path d="M14 7l2 2"></path>
+              <path d="M17 7h-3v-3"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <span>Jogging</span>
+          </div>
+          <div class="badge">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="red"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>Netflix</span>
+          </div>
+        </div>
+        <div class="interest-tags left">
+          <div class="badge">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 18V5l12-2v13"></path>
+              <circle cx="6" cy="18" r="3"></circle>
+              <circle cx="18" cy="16" r="3"></circle>
+            </svg>
+            <span>Pop music</span>
+          </div>
+          <div class="badge">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"
+              ></path>
+            </svg>
+            <span>Travelling</span>
+          </div>
+        </div>
+
+        <!-- Badge des vues -->
+        <div class="views-badge">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          1,000
+        </div>
+
+        <!-- Bouton J'aime -->
+        <div class="like-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+            ></path>
+          </svg>
+        </div>
+
+        <!-- Bouton Étoile -->
+        <div class="star-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+            ></polygon>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Informations du profil -->
+      <div class="profile-info">
+        <div class="profile-name-age">
+          <div class="crown-icon">
+            <img src="/res/cour.png" alt="Icône de couronne" />
+          </div>
+          <h1 class="profile-name">Tessa,</h1>
+          <span class="profile-age">19</span>
+
+          <!-- Badge vérifié -->
+          <div class="verified-badge">
+            <img
+              src="/res/instagram-verification-badge.png"
+              alt="Badge vérifié"
+            />
+          </div>
+        </div>
+
+        <!-- Localisation et statut -->
+        <div class="location">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span>Paris</span>
+        </div>
+
+        <!-- Statut actif -->
+        <div class="active-status">
+          <div class="active-indicator"></div>
+          <span class="active-text">Active maintenant</span>
+        </div>
+
+        <!-- Début de conversation -->
+        <div class="conversation-starter">
+          <span>💬 moi c'est marc.</span>
+        </div>
+
+        <!-- Actions du profil -->
+        <div class="profile-actions">
+          <div class="actions-buttons">
+            <button class="pass-button">Passer</button>
+            <button class="like-action-button">J'aime</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Simple JavaScript for interactions
+      document.addEventListener("DOMContentLoaded", function () {
+        let viewCount = 1000;
+        let liked = false;
+        let verified = true;
+
+        const viewsElement = document.querySelector(".views-badge");
+        const likeButton = document.querySelector(".like-button");
+        const verifiedBadge = document.querySelector(".verified-badge");
+
+        viewsElement.addEventListener("click", function () {
+          viewCount++;
+          viewsElement.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          ${viewCount.toLocaleString()}
+        `;
+        });
+
+        likeButton.addEventListener("click", function () {
+          liked = !liked;
+          if (liked) {
+            likeButton.classList.add("active");
+            likeButton
+              .querySelector("svg")
+              .setAttribute("fill", "currentColor");
+          } else {
+            likeButton.classList.remove("active");
+            likeButton.querySelector("svg").setAttribute("fill", "none");
+          }
+        });
+
+        verifiedBadge.addEventListener("click", function () {
+          verified = !verified;
+          if (verified) {
+            verifiedBadge.classList.remove("inactive");
+          } else {
+            verifiedBadge.classList.add("inactive");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
