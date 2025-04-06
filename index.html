@@ -66,6 +66,7 @@
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         border: 8px solid black;
         position: relative;
+        max-height: 800px; /* Réduction de la hauteur maximale du conteneur */
       }
 
       .status-bar {
@@ -103,7 +104,7 @@
         top: 1rem;
         width: 2rem;
         height: 2rem;
-        background-color: rgba(255, 255, 255, 0.7);
+        
         backdrop-filter: blur(4px);
         border-radius: 9999px;
         display: flex;
@@ -172,6 +173,19 @@
         margin-right: 0.25rem;
       }
 
+      .like-count {
+        position: absolute;
+        bottom: 1.25rem;
+        right: 5rem;
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(4px);
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-weight: bold;
+        font-size: 0.875rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
       .like-button {
         position: absolute;
         bottom: 1rem;
@@ -185,6 +199,11 @@
         cursor: pointer;
         transition: all 0.3s;
         background-color: #f3f4f6;
+        transform: scale(1);
+      }
+
+      .like-button:hover {
+        transform: scale(1.05);
       }
 
       .like-button.active {
@@ -309,6 +328,56 @@
         color: #6b7280;
       }
 
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+
+      .social-link {
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        transform: scale(1);
+        color: white;
+      }
+
+      .social-link:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      .social-link.instagram {
+        background: linear-gradient(
+          45deg,
+          #f09433 0%,
+          #e6683c 25%,
+          #dc2743 50%,
+          #cc2366 75%,
+          #bc1888 100%
+        );
+      }
+
+      .social-link.tiktok {
+        background-color: #000;
+      }
+
+      .social-link.snapchat {
+        background-color: #fffc00;
+        color: black;
+      }
+
+      .social-link svg {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+
       .profile-actions {
         margin-top: 1.5rem;
       }
@@ -327,13 +396,15 @@
         border-radius: 9999px;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
           0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        transition: background-color 0.3s;
+        transition: all 0.3s ease;
         border: none;
         cursor: pointer;
+        transform: scale(1);
       }
 
       .pass-button:hover {
         background-color: #dc2626;
+        transform: scale(1.05);
       }
 
       .like-action-button {
@@ -344,73 +415,87 @@
         border-radius: 9999px;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
           0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        transition: background 0.3s;
+        transition: all 0.3s ease;
         border: none;
         cursor: pointer;
+        transform: scale(1);
       }
 
       .like-action-button:hover {
         background: linear-gradient(to right, #3b82f6, #1d4ed8);
+        transform: scale(1.05);
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .pulse {
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .slide-in {
+        animation: slideIn 0.5s forwards;
+      }
+      .cree-votre-qr a{
+        text-decoration: none;
+        list-style: none;
+        color: #bc1888;
+        font-weight: 900;
+      }
+
+      .profile-video {
+        height: 400px; /* Réduction de la hauteur de la vidéo */
+        width: 100%;
+        object-fit: cover;
       }
     </style>
   </head>
-  <body>
+  <bo>
     <!-- Titre de l'application -->
-    <div class="app-title">
-      <h1>ma</h1>
-      <h2>Copine</h2>
-    </div>
+    
 
     <div class="phone-frame">
       <!-- Barre de statut -->
       <div class="status-bar">
-        <span>par lilksdy</span>
+        <span>weird 1680</span>
         <div class="status-bar-right">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path
-              d="M18 10a8 8 0 0 0-16 0v5.5a2.5 2.5 0 0 0 2.5 2.5h11a2.5 2.5 0 0 0 2.5-2.5V10Z"
-            ></path>
-            <path d="M10 2v2"></path>
-            <path d="M14 2v2"></path>
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M20 5v14"></path>
-            <path d="M16 5v14"></path>
-            <path d="M12 5v14"></path>
-            <path d="M8 5v14"></path>
-            <path d="M4 5v14"></path>
-          </svg>
+         <div class="cree-votre-qr">
+          <a href="https://wa.me/message/FTGVPJ7LOGV6G1">cree votre QR</a>
+         </div>
         </div>
       </div>
 
       <!-- Contenu du profil -->
       <div class="profile-content">
-        <!-- Image du profil -->
-        <img
-          src="/res/image.jpeg"
-          alt="Profil de Tessa"
-          class="profile-image"
-        />
+        <!-- Vidéo du profil -->
+        <video
+        src="/res/IMG_0926.MP4"
+        class="profile-video"
+        autoplay
+        loop
+        muted
+        playsinline
+        ></video>
 
         <!-- Bouton de fermeture -->
         <div class="close-button">
@@ -432,26 +517,12 @@
 
         <!-- Bouton du menu -->
         <div class="menu-button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="12" cy="12" r="1"></circle>
-            <circle cx="12" cy="6" r="1"></circle>
-            <circle cx="12" cy="18" r="1"></circle>
-          </svg>
+         
         </div>
 
         <!-- Tags d'intérêts -->
         <div class="interest-tags right">
-          <div class="badge">
+          <div class="badge slide-in" style="animation-delay: 0.1s">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -471,7 +542,7 @@
             </svg>
             <span>Jogging</span>
           </div>
-          <div class="badge">
+          <div class="badge slide-in" style="animation-delay: 0.2s">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -489,7 +560,7 @@
           </div>
         </div>
         <div class="interest-tags left">
-          <div class="badge">
+          <div class="badge slide-in" style="animation-delay: 0.3s">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -505,9 +576,9 @@
               <circle cx="6" cy="18" r="3"></circle>
               <circle cx="18" cy="16" r="3"></circle>
             </svg>
-            <span>Pop music</span>
+            <span>himra</span>
           </div>
-          <div class="badge">
+          <div class="badge slide-in" style="animation-delay: 0.4s">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -523,7 +594,7 @@
                 d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"
               ></path>
             </svg>
-            <span>Travelling</span>
+            <span>USA</span>
           </div>
         </div>
 
@@ -543,11 +614,14 @@
             <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
             <circle cx="12" cy="12" r="3"></circle>
           </svg>
-          1,000
+          <span id="view-count">1,000</span>
         </div>
 
+        <!-- Compteur de likes -->
+        <div class="like-count" id="like-count">143</div>
+
         <!-- Bouton J'aime -->
-        <div class="like-button">
+        <div class="like-button" id="like-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -572,11 +646,7 @@
             width="20"
             height="20"
             viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            fill="currentColor"
           >
             <polygon
               points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
@@ -589,13 +659,16 @@
       <div class="profile-info">
         <div class="profile-name-age">
           <div class="crown-icon">
-            <img src="/res/cour.png" alt="Icône de couronne" />
+            <img
+              src="/res/cour.png"
+              alt="Icône de couronne"
+            />
           </div>
-          <h1 class="profile-name">Tessa,</h1>
-          <span class="profile-age">19</span>
+          <h1 class="profile-name">Sandy,</h1>
+          <span class="profile-age">20</span>
 
           <!-- Badge vérifié -->
-          <div class="verified-badge">
+          <div class="verified-badge" id="verified-badge">
             <img
               src="/res/instagram-verification-badge.png"
               alt="Badge vérifié"
@@ -628,9 +701,64 @@
           <span class="active-text">Active maintenant</span>
         </div>
 
+        <!-- Liens vers les réseaux sociaux -->
+        <div class="social-links">
+          <a
+            href="#instagram"
+            class="social-link instagram pulse"
+            aria-label="Instagram"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="#tiktok" class="social-link tiktok" aria-label="TikTok">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M19.321 5.562a5.122 5.122 0 0 1-2.8-2.8A5.832 5.832 0 0 1 16.066 0h-3.602v16.5a3 3 0 1 1-1.888-2.804V9.891a7.5 7.5 0 0 0-1.304-.116 7.537 7.537 0 0 0-7.5 7.537A7.49 7.49 0 0 0 7.497 24a7.538 7.538 0 0 0 7.539-7.5c0-.167-.009-.333-.018-.5V7.523a9.768 9.768 0 0 0 4.302 1.076v-3.037z"
+              />
+            </svg>
+          </a>
+          <a
+            href="#snapchat"
+            class="social-link snapchat"
+            aria-label="Snapchat"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12.154 0C11.415.02 10.67.07 10.077.22a5.064 5.064 0 0 0-3.243 2.588c-.693 1.27-.593 3.446-.443 5.17 0 .218.02.397.04.615.099.158.05.2-.148.277-.198.08-.396.119-.594.198-.396.139-.792.338-1.188.537-.277.139-.535.317-.733.496-.178.159-.297.338-.277.576.02.179.099.358.257.497.218.179.455.259.733.338.615.158 1.228.198 1.783.377.218.06.436.159.594.318.238.238.238.576.198.854-.04.356-.139.693-.218 1.05-.198.834-.495 1.648-.613 2.482-.06.437.02.854.257 1.21.218.32.495.558.812.756 1.01.615 2.258.874 3.342 1.032.851.119 1.704.158 2.556.119.83-.04 1.662-.139 2.474-.337.415-.1.83-.219 1.187-.397.536-.258.993-.596 1.35-1.072.218-.318.337-.656.317-1.032-.04-.735-.238-1.43-.396-2.145-.1-.397-.159-.814-.218-1.211-.04-.258-.06-.517.158-.735.456-.398 1.11-.477 1.704-.576.576-.1 1.211-.18 1.688-.497.179-.119.337-.258.396-.456.06-.219.06-.397-.08-.576-.139-.219-.337-.338-.554-.437-.693-.298-1.367-.457-2.08-.597-.09-.02-.159-.06-.119-.179.08-.258.119-.497.159-.755.059-.358.118-.735.118-1.112.02-.654-.06-1.329-.297-1.944-.278-.755-.734-1.39-1.37-1.905-.574-.476-1.267-.734-1.98-.932C14.23.159 13.42.06 12.61.02c-.16-.02-.298-.02-.456 0z"
+              ></path>
+            </svg>
+          </a>
+        </div>
+
         <!-- Début de conversation -->
         <div class="conversation-starter">
-          <span>💬 moi c'est marc.</span>
+          <span>💬 tu veux quoi de moi ?</span>
         </div>
 
         <!-- Actions du profil -->
@@ -643,50 +771,149 @@
       </div>
     </div>
 
+
     <script>
-      // Simple JavaScript for interactions
-      document.addEventListener("DOMContentLoaded", function () {
-        let viewCount = 1000;
-        let liked = false;
-        let verified = true;
+    document.addEventListener("DOMContentLoaded", function () {
+  // Récupérer la valeur actuelle du compteur de vues depuis le localStorage
+  let viewCount = localStorage.getItem("viewCount");
 
-        const viewsElement = document.querySelector(".views-badge");
-        const likeButton = document.querySelector(".like-button");
-        const verifiedBadge = document.querySelector(".verified-badge");
+  // Si aucune valeur n'est trouvée, initialiser à 1000
+  if (!viewCount) {
+    viewCount = 1000;
+  } else {
+    // Incrémenter le compteur de vues
+    viewCount = parseInt(viewCount) + 1;
+  }
 
-        viewsElement.addEventListener("click", function () {
-          viewCount++;
-          viewsElement.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-            <circle cx="12" cy="12" r="3"></circle>
-          </svg>
-          ${viewCount.toLocaleString()}
-        `;
-        });
+  // Mettre à jour le localStorage avec la nouvelle valeur
+  localStorage.setItem("viewCount", viewCount);
 
-        likeButton.addEventListener("click", function () {
-          liked = !liked;
-          if (liked) {
-            likeButton.classList.add("active");
-            likeButton
-              .querySelector("svg")
-              .setAttribute("fill", "currentColor");
-          } else {
-            likeButton.classList.remove("active");
-            likeButton.querySelector("svg").setAttribute("fill", "none");
-          }
-        });
+  // Récupérer la valeur actuelle du compteur de likes depuis le localStorage
+  let likeCount = localStorage.getItem("likeCount");
 
-        verifiedBadge.addEventListener("click", function () {
-          verified = !verified;
-          if (verified) {
-            verifiedBadge.classList.remove("inactive");
-          } else {
-            verifiedBadge.classList.add("inactive");
-          }
-        });
-      });
+  // Si aucune valeur n'est trouvée, initialiser à 100
+  if (!likeCount) {
+    likeCount = 100;
+  } else {
+    likeCount = parseInt(likeCount);
+  }
+
+  // Récupérer l'état du bouton "J'aime" depuis le localStorage
+  let liked = localStorage.getItem("liked") === "true";
+  let verified = true;
+
+  // Elements
+  const viewsElement = document.querySelector(".views-badge");
+  const viewCountElement = document.getElementById("view-count");
+  const likeButton = document.getElementById("like-button");
+  const likeCountElement = document.getElementById("like-count");
+  const verifiedBadge = document.getElementById("verified-badge");
+  const socialLinks = document.querySelectorAll(".social-link");
+
+  // Mettre à jour l'élément HTML avec la nouvelle valeur
+  viewCountElement.textContent = viewCount.toLocaleString();
+  likeCountElement.textContent = likeCount;
+
+  // Mettre à jour l'état du bouton "J'aime"
+  if (liked) {
+    likeButton.classList.add("active");
+    likeButton.querySelector("svg").setAttribute("fill", "currentColor");
+  }
+
+  // Social links hover effects
+  socialLinks.forEach((link) => {
+    link.addEventListener("mouseover", function () {
+      this.style.transform = "scale(1.1)";
+      this.style.boxShadow = "0 8px 16px rgba(0,0,0,0.15)";
+    });
+
+    link.addEventListener("mouseout", function () {
+      this.style.transform = "scale(1)";
+      this.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
+    });
+
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      alert("Redirecting to social profile...");
+    });
+  });
+
+  // Update views
+  viewsElement.addEventListener("click", function () {
+    viewCount++;
+    viewCountElement.textContent = viewCount.toLocaleString();
+
+    // Add pulse animation temporarily
+    viewsElement.classList.add("pulse");
+    setTimeout(() => {
+      viewsElement.classList.remove("pulse");
+    }, 1000);
+  });
+
+  // Like button functionality
+  likeButton.addEventListener("click", function () {
+    liked = !liked;
+
+    if (liked) {
+      likeButton.classList.add("active");
+      likeButton.querySelector("svg").setAttribute("fill", "currentColor");
+      likeCount++;
+    } else {
+      likeButton.classList.remove("active");
+      likeButton.querySelector("svg").setAttribute("fill", "none");
+      likeCount--;
+    }
+
+    // Animation for like count
+    likeCountElement.classList.add("pulse");
+    setTimeout(() => {
+      likeCountElement.classList.remove("pulse");
+    }, 1000);
+
+    likeCountElement.textContent = likeCount;
+
+    // Mettre à jour le localStorage
+    localStorage.setItem("likeCount", likeCount);
+    localStorage.setItem("liked", liked);
+  });
+
+  // Verified badge toggle
+  verifiedBadge.addEventListener("click", function () {
+    verified = !verified;
+
+    if (verified) {
+      verifiedBadge.classList.remove("inactive");
+    } else {
+      verifiedBadge.classList.add("inactive");
+    }
+  });
+
+  // Profile buttons
+  document.querySelector(".pass-button").addEventListener("click", function () {
+    alert("Profile skipped!");
+  });
+
+  document.querySelector(".like-action-button").addEventListener("click", function () {
+    if (!liked) {
+      likeButton.click(); // Trigger the like button click event
+    }
+    alert("You liked this profile!");
+  });
+
+  // Add staggered animation to badges on load
+  const badges = document.querySelectorAll(".badge");
+  badges.forEach((badge, index) => {
+    setTimeout(() => {
+      badge.style.opacity = "1";
+      badge.style.transform = "translateY(0)";
+    }, index * 100);
+  });
+});
+
+
+
+
+
     </script>
   </body>
 </html>
